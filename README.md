@@ -1,27 +1,23 @@
-vagrant-xe11g
-=============
+# vagrant-xe11g
 
 Version 1.0.1 - Notes
 
-Changed to smaller packer.io based box with VBox 4.3.2 VBGA
-Turned off iptables in site_xe11g.pp script in the OS config section.
+* Changed to smaller packer.io based box with VBox 4.3.2 VBGA
+* Turned off iptables in site_xe11g.pp script in the OS config section.
 
-
-
-Motivation:
+## Motivation
 
 There are times you need an Oracle database, but you don't want to go into all of the effort and cruft of creating one.
 
-This creates an Oracle XE 11g database which is fully functional to use with the HR schema unlocked in about 5 minutes.
+This creates an Oracle XE 11g database which is fully functional to use with the `HR` schema unlocked in about 5 minutes.
 
-It is very lean and mean.  It boots, via the Vagrantfile, with 512mb RAM allocated to the VM and has the bare minimum of files on the Vagrant box.
-It also has 1GB of swap.
+It is very lean and mean.  It boots, via the Vagrantfile, with 512mb RAM allocated to the VM and has the bare minimum of files on the Vagrant box. It also has 1GB of swap.
 
-Kit Needed:
+## Kit Needed
 
 Oracle 11g XE R2
 
-http://www.oracle.com/technetwork/products/express-edition/overview/index.html
+http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html
 
 These scripts use:
 
@@ -58,5 +54,15 @@ Enjoy...
 
 Twitter: @baldwinonline
 
+## SQL*PLus
 
+Login with `vagrant ssh` and
 
+    $ sqlplus sys@XE as sysdba
+    Enter password: oracle
+
+## APEX
+
+Login to http://localhost:8080/apex/apex_admin with user `admin` and password `oracle`. A new password is required with a number, upper-case, and a punctuation mark. For example `Pa$$w0rd`.
+
+A default workspace named INTERNAL exists.
