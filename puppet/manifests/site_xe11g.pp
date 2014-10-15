@@ -4,11 +4,9 @@
 # needs the following fiddyspence-sysctl, erwbgy-limits puppet modules
 #
 
- 
 include os2, oraclexe
 
 Class['os2'] -> Class['oraclexe']
-
 
 # operating settings for Database & Middleware
 class os2 {
@@ -52,23 +50,19 @@ class os2 {
   sysctl { 'net.core.wmem_default':         ensure => 'present', permanent => 'yes', value => '262144',}
   sysctl { 'net.core.wmem_max':             ensure => 'present', permanent => 'yes', value => '1048576',}
 
-
   # 2GB is the largest swapfle that XE allows
-
   exec { "create swap file":
     command => "/bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=2048",
     user => root,
     creates => "/var/swap.1",
   }
 
- 
   exec { "attach swap file":
     command => "/sbin/mkswap /var/swap.1 && /sbin/swapon /var/swap.1",
     require => Exec["create swap file"],
     user => root,
     unless => "/sbin/swapon -s | grep /var/swap.1",
   }
-
 
   # add swap file entry to fstab
     exec {"add swapfile entry to fstab":
@@ -87,9 +81,6 @@ class os2 {
         hasstatus => true,
   }
 
-
-
- 
 }
 
 
